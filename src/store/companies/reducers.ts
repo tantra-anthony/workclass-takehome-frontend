@@ -1,4 +1,3 @@
-import produce from 'immer';
 import { CompaniesActionTypes, CompaniesState } from './types';
 
 const initialState: CompaniesState = {

@@ -19,14 +19,14 @@ function searchJobsRequest(): JobsActionTypes {
   };
 }
 
-function searchJobsSuccess(jobs: Job[]): JobsActionTypes {
+export function searchJobsSuccess(jobs: Job[]): JobsActionTypes {
   return {
     type: SEARCH_JOBS_SUCCESS,
     jobs,
   };
 }
 
-function searchJobsError(error: string): JobsActionTypes {
+export function searchJobsError(error: string): JobsActionTypes {
   return {
     type: SEARCH_JOBS_ERROR,
     error,

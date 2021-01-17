@@ -19,14 +19,14 @@ function searchCompaniesRequest(): CompaniesActionTypes {
   };
 }
 
-function searchCompaniesSuccess(companies: Company[]): CompaniesActionTypes {
+export function searchCompaniesSuccess(companies: Company[]): CompaniesActionTypes {
   return {
     type: SEARCH_COMPANIES_SUCCESS,
     companies,
   };
 }
 
-function searchCompaniesError(error: string): CompaniesActionTypes {
+export function searchCompaniesError(error: string): CompaniesActionTypes {
   return {
     type: SEARCH_COMPANIES_ERROR,
     error,

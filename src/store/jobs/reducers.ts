@@ -1,4 +1,3 @@
-import produce from 'immer';
 import { JobsActionTypes, JobsState } from './types';
 
 const initialState: JobsState = {
