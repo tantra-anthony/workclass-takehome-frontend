@@ -94,7 +94,7 @@ function AppHeaderBar() {
       <Container maxWidth="lg">
         <Toolbar disableGutters>
           <div onClick={onLogoPressed} className={classes.logoContainer}>
-            <img src={workclassLogo} width={60} height={60} />
+            <img alt="workclass" src={workclassLogo} width={60} height={60} />
           </div>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
