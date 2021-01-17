@@ -11,6 +11,7 @@ interface SearchJobsRequestAction {
 interface SearchJobsSuccessAction {
   type: typeof SEARCH_JOBS_SUCCESS;
   jobs: Job[];
+  count: number;
 }
 
 interface SearchJobsErrorAction {
@@ -23,7 +24,7 @@ export type JobsActionTypes =
   | SearchJobsSuccessAction
   | SearchJobsErrorAction;
 
-interface JobsByIdState {
+export interface JobsByIdState {
   [id: string]: Job;
 }
 
@@ -31,4 +32,5 @@ export interface JobsState {
   fetching: boolean;
   byId: JobsByIdState;
   allId: string[];
+  count: number;
 }

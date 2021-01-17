@@ -8,3 +8,7 @@ export function toQueryString(query: any): string {
 export function formatISODate(date: string, format: string): string {
   return moment(date).format(format);
 }
+
+export function getPicsumImageUri(id: number): string {
+  return `https://picsum.photos/id/${id}/200/300`;
+}

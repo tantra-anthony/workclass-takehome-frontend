@@ -19,9 +19,12 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   Action<string>
 >;
 
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunk)),
-);
+const middlewares = [thunk];
+const middlewareEnhancer = applyMiddleware(...middlewares);
+
+const enhancers = [middlewareEnhancer];
+const composedEnhancers = composeWithDevTools(...enhancers);
+
+const store = createStore(rootReducer, composedEnhancers);
 
 export default store;

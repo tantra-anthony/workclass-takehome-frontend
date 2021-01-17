@@ -11,6 +11,7 @@ interface SearchCompaniesRequestAction {
 interface SearchCompaniesSuccessAction {
   type: typeof SEARCH_COMPANIES_SUCCESS;
   companies: Company[];
+  count: number;
 }
 
 interface SearchCompaniesErrorAction {
@@ -23,7 +24,7 @@ export type CompaniesActionTypes =
   | SearchCompaniesSuccessAction
   | SearchCompaniesErrorAction;
 
-interface CompaniesByIdState {
+export interface CompaniesByIdState {
   [id: string]: Company;
 }
 
@@ -31,4 +32,5 @@ export interface CompaniesState {
   fetching: boolean;
   byId: CompaniesByIdState;
   allId: string[];
+  count: number;
 }

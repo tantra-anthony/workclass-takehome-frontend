@@ -1,5 +1,6 @@
 import { AppThunk } from '..';
-import { Job } from '../../services/jobs/types';
+import { Job, JobsSearchQueryParams } from '../../services/jobs/types';
+import { requestSearchJobs } from '../../services/jobs';
 import {
   JobsActionTypes,
   SEARCH_JOBS_ERROR,
@@ -7,9 +8,17 @@ import {
   SEARCH_JOBS_SUCCESS,
 } from './types';
 
-export function searchJobs(): AppThunk {
+export function searchJobs(query: JobsSearchQueryParams): AppThunk {
   return async (dispatch) => {
     dispatch(searchJobsRequest());
+
+    return requestSearchJobs(query)
+      .then((data) => {
+        dispatch(searchJobsSuccess(data.jobs, data.count));
+      })
+      .catch((e) => {
+        dispatch(searchJobsError(e));
+      });
   };
 }
 
@@ -19,14 +28,15 @@ function searchJobsRequest(): JobsActionTypes {
   };
 }
 
-export function searchJobsSuccess(jobs: Job[]): JobsActionTypes {
+function searchJobsSuccess(jobs: Job[], count: number): JobsActionTypes {
   return {
     type: SEARCH_JOBS_SUCCESS,
     jobs,
+    count,
   };
 }
 
-export function searchJobsError(error: string): JobsActionTypes {
+function searchJobsError(error: string): JobsActionTypes {
   return {
     type: SEARCH_JOBS_ERROR,
     error,

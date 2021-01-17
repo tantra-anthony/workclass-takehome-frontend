@@ -1,5 +1,9 @@
 import { AppThunk } from '..';
-import { Company } from '../../services/companies/types';
+import { requestSearchCompanies } from '../../services/companies';
+import {
+  CompaniesSearchQueryParam,
+  Company,
+} from '../../services/companies/types';
 import {
   CompaniesActionTypes,
   SEARCH_COMPANIES_REQUEST,
@@ -7,9 +11,17 @@ import {
   SEARCH_COMPANIES_SUCCESS,
 } from './types';
 
-export function searchCompanies(): AppThunk {
+export function searchCompanies(query: CompaniesSearchQueryParam): AppThunk {
   return async (dispatch) => {
     dispatch(searchCompaniesRequest());
+
+    return requestSearchCompanies(query)
+      .then((data) => {
+        dispatch(searchCompaniesSuccess(data.companies, data.count));
+      })
+      .catch((e) => {
+        dispatch(searchCompaniesError(e));
+      });
   };
 }
 
@@ -19,14 +31,18 @@ function searchCompaniesRequest(): CompaniesActionTypes {
   };
 }
 
-export function searchCompaniesSuccess(companies: Company[]): CompaniesActionTypes {
+function searchCompaniesSuccess(
+  companies: Company[],
+  count: number,
+): CompaniesActionTypes {
   return {
     type: SEARCH_COMPANIES_SUCCESS,
     companies,
+    count,
   };
 }
 
-export function searchCompaniesError(error: string): CompaniesActionTypes {
+function searchCompaniesError(error: string): CompaniesActionTypes {
   return {
     type: SEARCH_COMPANIES_ERROR,
     error,
