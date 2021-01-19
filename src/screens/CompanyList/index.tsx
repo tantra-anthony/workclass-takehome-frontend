@@ -93,7 +93,7 @@ function CompanyList(props: CompanyListProps) {
               <CompanyCard
                 imageUri={getPicsumImageUri(page + idx)}
                 title={company.name}
-                description={t('placeholder.description')}
+                description={t('jobs_number', { count: company.jobs ? company.jobs.length : 0 })}
               />
             </Grid>
           ))}

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import useLanguage from '../../utils/hooks/useLanguage';
 import { connect, ConnectedProps, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import { searchJobs } from '../../store/jobs/actions';
@@ -70,7 +69,6 @@ function JobCard(props: JobCardProps) {
 
 function JobList(props: JobListProps) {
   const { jobs, pages } = props;
-  const { t } = useLanguage();
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
 
