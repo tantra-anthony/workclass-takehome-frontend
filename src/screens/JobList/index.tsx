@@ -92,7 +92,7 @@ function JobList(props: JobListProps) {
               <JobCard
                 imageUri={job.logoUrl}
                 title={job.jobTitle}
-                description={t('placeholder.description')}
+                description={job.company ? job.company.name : ''}
               />
             </Grid>
           ))}
