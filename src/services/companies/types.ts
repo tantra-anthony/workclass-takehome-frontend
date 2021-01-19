@@ -4,6 +4,7 @@ export interface Company {
   id: number;
   name: string;
   jobs?: Job[];
+  jobCount?: number;
   createdAt: string;
   updatedAt: string;
 }
