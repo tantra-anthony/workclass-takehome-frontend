@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
-import { useDispatch } from 'react-redux';
 import { requestFindCompanyById } from '../../services/companies';
 import { Job } from '../../services/jobs/types';
 import Typography from '@material-ui/core/Typography';
