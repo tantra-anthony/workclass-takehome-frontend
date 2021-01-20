@@ -14,6 +14,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import { getPicsumImageUri } from '../../utils/common';
+import { useHistory } from 'react-router-dom';
 
 const COMPANY_PER_PAGE = 6;
 
@@ -23,7 +24,7 @@ const styles = makeStyles(() => ({
   },
   card: {
     height: '100%',
-  }
+  },
 }));
 
 const mapStateToProps = (state: RootState) => {
@@ -42,15 +43,16 @@ interface CompanyCardProps {
   imageUri: string;
   title: string;
   description: string;
+  onClick?: () => void;
 }
 
 function CompanyCard(props: CompanyCardProps) {
-  const { imageUri, title, description } = props;
+  const { imageUri, title, description, onClick } = props;
   const classes = styles();
 
   return (
     <Card className={classes.card}>
-      <CardActionArea>
+      <CardActionArea onClick={onClick ? onClick : () => {}}>
         <CardMedia
           className={classes.media}
           image={imageUri}
@@ -74,6 +76,7 @@ function CompanyList(props: CompanyListProps) {
   const { t } = useLanguage();
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(
@@ -84,6 +87,10 @@ function CompanyList(props: CompanyListProps) {
     );
   }, [page, dispatch]);
 
+  function onPressCompanyEntry(id: string) {
+    history.push(`/companies/${id}`);
+  }
+
   return (
     <Container maxWidth="lg">
       <Box marginY={3}>
@@ -91,6 +98,7 @@ function CompanyList(props: CompanyListProps) {
           {companies.map((company, idx) => (
             <Grid item xs={12} sm={6} md={4}>
               <CompanyCard
+                onClick={() => onPressCompanyEntry(company.id.toString())}
                 imageUri={getPicsumImageUri(page + idx)}
                 title={company.name}
                 description={t('jobs_number', { count: company.jobCount || 0 })}

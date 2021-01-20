@@ -1,5 +1,5 @@
 import { FunctionComponent, ComponentClass } from 'react';
-import { Home, JobList, CompanyList } from '../screens';
+import { Home, JobList, CompanyList, CompanyDetail } from '../screens';
 
 type RouteType = {
   key: string;
@@ -24,6 +24,12 @@ export const routes: RouteType[] = [
   {
     key: 'companies',
     link: '/companies',
+    exact: true,
     component: CompanyList,
+  },
+  {
+    key: 'companies',
+    link: '/companies/:id',
+    component: CompanyDetail,
   },
 ];

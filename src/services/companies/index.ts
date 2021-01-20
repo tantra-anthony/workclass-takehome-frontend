@@ -1,7 +1,11 @@
 import { toQueryString } from '../../utils/common';
 import { get } from '../http';
 import { Job } from '../jobs/types';
-import { CompaniesSearchResult, CompaniesSearchQueryParam } from './types';
+import {
+  CompaniesSearchResult,
+  CompaniesSearchQueryParam,
+  Company,
+} from './types';
 
 export async function requestSearchCompanies(
   query: CompaniesSearchQueryParam,
@@ -14,4 +18,10 @@ export async function requestFindCompanyJobsById(
   companyId: string,
 ): Promise<Job[]> {
   return (await get<Job[]>(`companies/${companyId}/jobs`)).data;
+}
+
+export async function requestFindCompanyById(
+  companyId: string,
+): Promise<Company> {
+  return (await get<Company>(`companies/${companyId}`)).data;
 }

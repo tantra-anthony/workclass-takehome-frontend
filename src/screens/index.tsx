@@ -16,4 +16,9 @@ const CompanyList = Loadable({
   loading: Loader,
 });
 
-export { Home, JobList, CompanyList };
+const CompanyDetail = Loadable({
+  loader: () => import('./CompanyDetail'),
+  loading: Loader,
+});
+
+export { Home, JobList, CompanyList, CompanyDetail };
